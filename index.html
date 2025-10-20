@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Women's Day 💕</title>
+  <style>
+    body {
+      margin: 0;
+      background-color: black;
+      overflow: hidden;
+    }
+
+    .dialog {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #F8C7DA;
+      padding: 20px;
+      border-radius: 10px;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      font-size: 24px;
+      color: white;
+      text-align: center;
+      box-shadow: 0 0 15px pink;
+      z-index: 1000;
+    }
+
+    .popup {
+      position: absolute;
+      padding: 10px 20px;
+      background-color: #F8C7DA;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      font-weight: bold;
+      font-size: 24px;
+      color: white;
+      border-radius: 8px;
+      box-shadow: 0 0 10px pink;
+      animation: fadeOut 8s ease forwards;
+    }
+
+    @keyframes fadeOut {
+      0% { opacity: 1; transform: scale(1); }
+      100% { opacity: 0; transform: scale(0.5); }
+    }
+  </style>
+</head>
+<body>
+  <div id="startDialog" class="dialog">Click để tiếp tục 💖</div>
+  <audio id="backgroundMusic" src="assets/music.mp3" loop></audio>
+
+  <script>
+    const message = "Happy Women's Day💐 :3";
+    const dialog = document.getElementById("startDialog");
+    const audio = document.getElementById("backgroundMusic");
+
+    function createPopup() {
+      const popup = document.createElement("div");
+      popup.className = "popup";
+      popup.textContent = message;
+
+      const screenWidth = window.innerWidth;
+      const screenHeight = window.innerHeight;
+      const x = Math.random() * (screenWidth - 200);
+      const y = Math.random() * (screenHeight - 50);
+
+      popup.style.left = `${x}px`;
+      popup.style.top = `${y}px`;
+      document.body.appendChild(popup);
+
+      setTimeout(() => popup.remove(), 8000);
+    }
+
+    function startPopups() {
+      for (let i = 0; i < 50; i++) {
+        setTimeout(createPopup, i * 100);
+      }
+    }
+
+    document.addEventListener("click", function startExperience() {
+      dialog.style.display = "none";
+      audio.play().catch(console.error);
+      startPopups();
+      document.removeEventListener("click", startExperience);
+    });
+  </script>
+</body>
+</html>
